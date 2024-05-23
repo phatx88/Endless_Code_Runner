@@ -95,37 +95,37 @@ public class BridgeSpawner : MonoBehaviour
                 segment.segType = (enType)Random.Range(0, 3);
                 if (segment.segType == enType.Straight)
                 {
-                    segment.segPrefab = bridgePrefabs[Random.Range(0, 6)];
+                    segment.segPrefab = bridgePrefabs[Random.Range(0, 11)];
                 }
                 else if (segment.segType == enType.L_Corner)
                 {
-                    segment.segPrefab = bridgePrefabs[7];
+                    segment.segPrefab = bridgePrefabs[12];
                 }
                 else if (segment.segType == enType.R_Corner)
                 {
-                    segment.segPrefab = bridgePrefabs[6];
+                    segment.segPrefab = bridgePrefabs[11];
                 }
                 break;
             case enDirection.East:
                 segment.segType = (enType)Random.Range(0, 2);
                 if (segment.segType == enType.Straight)
                 {
-                    segment.segPrefab = bridgePrefabs[Random.Range(0, 6)];
+                    segment.segPrefab = bridgePrefabs[Random.Range(0, 11)];
                 }
                 else if (segment.segType == enType.L_Corner)
                 {
-                    segment.segPrefab = bridgePrefabs[7];
+                    segment.segPrefab = bridgePrefabs[12];
                 }
                 break;
             case enDirection.West:
                 segment.segType = (enType)Random.Range(1, 3);
                 if (segment.segType == enType.Straight)
                 {
-                    segment.segPrefab = bridgePrefabs[Random.Range(0, 6)];
+                    segment.segPrefab = bridgePrefabs[Random.Range(0, 11)];
                 }
                 else if (segment.segType == enType.R_Corner)
                 {
-                    segment.segPrefab = bridgePrefabs[6];
+                    segment.segPrefab = bridgePrefabs[11];
                 }
                 break;
         }

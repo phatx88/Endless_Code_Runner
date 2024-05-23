@@ -15,18 +15,28 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     BridgeSpawner bridgeSpawner;
 
+    int coinCollected = 0;
+    int coinCollectedBest;
+    int distanceRun = 0;
+    int distanceRunBest;
     // Player speed and movement-related variables
     public float playerStartSpeed = 10.0f;
     float playerSpeed;
     float gValue = 20.0f; // Gravity value
     float translationFactor = 10.0f; // Smoothens the turning of direction
     float jumpForce = 1.5f;
+    float timer = 0;
+    float distance = 0;
+    // Additional variable for vertical velocity
+    float verticalVelocity = 0f;
     bool canTurnRight = false;
     bool canTurnLeft = false;
     bool isDead = false;
+    bool isMoving = false;
 
-    // Additional variable for vertical velocity
-    float verticalVelocity = 0f;
+    Vector3 previousPosition;
+    Vector3 lastPosition;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +49,8 @@ public class PlayerController : MonoBehaviour
         playerDirection = enDirection.North; // Set initial direction to North
         playerNextDirection = enDirection.North; // Ensure next direction is also North
         AudioController.Instance.PlayMusic("TikiDrum");
+
+        lastPosition = transform.position; // Initialize lastPosition
     }
 
     // Update is called once per frame
@@ -57,7 +69,10 @@ public class PlayerController : MonoBehaviour
             characterController.enabled = true;
         }
 
-        playerSpeed += 0.005f * Time.deltaTime; // Gradually increase player speed over time
+        isMoving = false; // Reset isMoving flag
+
+        //timer += Time.deltaTime;
+        //playerSpeed += 0.05f * Time.deltaTime; // Gradually increase player speed over time
 
         #region Horizontal Direction 
         // Handles player direction change based on key inputs 'G' and 'F'
@@ -158,14 +173,37 @@ public class PlayerController : MonoBehaviour
         playerVector.y = verticalVelocity * Time.deltaTime;
         #endregion
 
-        if (transform.position.y < -0.5f)
+
+        //Death Flag On if Fall into bottom
+        if (transform.position.y < -1f)
         {
             isDead = true;
             AudioController.Instance.PlaySFX("scream", 2f);
             anim.SetTrigger("isTripping");
+            SaveScore();
         }
 
+        previousPosition = transform.position; // Store previous position before moving
+
         characterController.Move(playerVector); // Move the character controller
+
+        lastPosition = transform.position; // Store previous position after moving
+
+        // Calculate distance based on position change
+        if (Vector3.Distance(previousPosition, transform.position) > 0.01f) // Check if player has moved
+        {
+            isMoving = true; // Set isMoving to true if player has moved
+        }
+
+        if (isMoving)
+        {
+            timer += Time.deltaTime; // Update timer only if player is moving
+            playerSpeed += 0.05f * Time.deltaTime; // Gradually increase player speed over time
+        }
+
+        //Calculate Distrance Travelled
+        distance = playerSpeed * timer;
+        distanceRun = (int)distance;
     }
 
     void DoSliding()
@@ -205,16 +243,24 @@ public class PlayerController : MonoBehaviour
             canTurnRight = false;
         }
 
-        if(hit.gameObject.tag == "Obstacle")
+
+        //Death Flag On if Hit Obstacle
+        if (hit.gameObject.tag == "Obstacle")
         {
             isDead = true;
             AudioController.Instance.PlaySFX("splat", 0.4f);
             anim.SetTrigger("isTripping");
+            SaveScore();
         }
     }
 
     private void OnGUI()
     {
+        GUI.Label(new Rect(10, 10, 100, 20), $"Coins: {coinCollected}");
+        GUI.Label(new Rect(10, 40, 150, 20), $"Coins Collect Best: {PlayerPrefs.GetInt("highScoreC")}");
+        GUI.Label(new Rect(10, 70, 100, 20), $"Distance: {distanceRun}");
+        GUI.Label(new Rect(10, 100, 150, 20), $"Distance Run Best: {PlayerPrefs.GetInt("highScoreD")}");
+
         if (isDead)
         {
             if(GUI.Button(new Rect(0.4f * Screen.width, 0.6f * Screen.height, 0.2f * Screen.width, 0.1f* Screen.height), "RESPAWN"))
@@ -222,6 +268,8 @@ public class PlayerController : MonoBehaviour
                 DeathEvent();
             }
         }
+
+      
     }
 
     void DeathEvent()
@@ -244,6 +292,10 @@ public class PlayerController : MonoBehaviour
 
         // Clean the scene through the BridgeSpawner
         bridgeSpawner.CleanTheScene();
+
+        //Reset Timer & score
+        timer = 0;
+        coinCollected = 0;
 
         // Trigger the spawn animation
         anim.SetTrigger("isSpawned");
@@ -276,4 +328,30 @@ public class PlayerController : MonoBehaviour
         AudioController.Instance.PlaySFX("gruntJumpLand",2f);
     }
 
+    private void OnTriggerEnter(Collider col)
+    {
+        if(col.gameObject.tag == "Coin")
+        {
+            Destroy(col.gameObject);
+            AudioController.Instance.PlaySFX("coin");
+            coinCollected += 1;
+        }
+    }
+
+    void SaveScore()
+    {
+        if(coinCollected > coinCollectedBest)
+        {
+            coinCollectedBest = coinCollected;
+            PlayerPrefs.SetInt("highScoreC", coinCollectedBest);
+            PlayerPrefs.Save();
+        }
+
+        if (distanceRun > distanceRunBest)
+        {
+            distanceRunBest = distanceRun;
+            PlayerPrefs.SetInt("highScoreD", distanceRunBest);
+            PlayerPrefs.Save();
+        }
+    }
 }

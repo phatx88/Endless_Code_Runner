@@ -60,11 +60,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BridgeSpawner.cs" />
     <Compile Include="Assets\Scripts\CameraFollowing.cs" />
-    <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\OceanMovement.cs" />
     <Compile Include="Assets\Scripts\AudioController.cs" />
-    <Compile Include="Assets\Scripts\SingletonPersistent.cs" />
     <Compile Include="Assets\Scripts\Sound.cs" />
+    <Compile Include="Assets\Scripts\SingletonPersistent.cs" />
+    <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\CoinRevolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fantasy Skybox FREE\Readme.txt" />

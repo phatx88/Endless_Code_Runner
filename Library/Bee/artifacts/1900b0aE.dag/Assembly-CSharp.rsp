@@ -348,6 +348,7 @@
 "Assets/Scripts/AudioController.cs"
 "Assets/Scripts/BridgeSpawner.cs"
 "Assets/Scripts/CameraFollowing.cs"
+"Assets/Scripts/CoinRevolver.cs"
 "Assets/Scripts/OceanMovement.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/SingletonPersistent.cs"

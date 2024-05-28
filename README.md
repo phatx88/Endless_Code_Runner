@@ -1,10 +1,10 @@
 Project Unity 3D Endless Runner, các key features bao gồm:
 1) PLAYER:
   -  Cho phép người chơi điều khiển nhân vật bằng các phím di chuyển thông thường.
-     ![image](https://github.com/phatx88/Endless_Code_Runner/assets/66936482/bf2bfb3d-b5a6-48be-881c-4e91329ad790)
+     <img src="https://github.com/phatx88/Endless_Code_Runner/assets/66936482/bf2bfb3d-b5a6-48be-881c-4e91329ad790" width="100" height="100">
   -  Nhân có thể Nhảy hoặc Slide để tránh vật cản.
-     ![image](https://github.com/phatx88/Endless_Code_Runner/assets/66936482/eede6d6c-4e6e-4eaf-9caf-938ef8b3b89f)
-     ![image](https://github.com/phatx88/Endless_Code_Runner/assets/66936482/49d4e3a9-92dd-4ddc-b841-2dbb08a64641)
+     <img src="https://github.com/phatx88/Endless_Code_Runner/assets/66936482/eede6d6c-4e6e-4eaf-9caf-938ef8b3b89f" width="100" height="100">
+     <img src="https://github.com/phatx88/Endless_Code_Runner/assets/66936482/49d4e3a9-92dd-4ddc-b841-2dbb08a64641" width="100" height="100">
   -  Người chơi có máu, mất dần khi va chạm vật cản hoặc chệch khỏi đường chạy.
   -  Trò chơi kết thúc khi người chơi hết máu và lượt.
 2) Vật cản và Vật phẩm:

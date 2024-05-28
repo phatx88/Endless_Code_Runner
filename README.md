@@ -11,7 +11,7 @@ Project Unity 3D Endless Runner, các key features bao gồm:
   -  Trò chơi kết thúc khi người chơi hết máu và lượt.
 2) Vật cản và Vật phẩm:
   -  Sinh ra các vật cản để trừ điểm và máu của người chơi.
-     <img src="![image](https://github.com/phatx88/Endless_Code_Runner/assets/66936482/e1c8b5ac-a5ec-4171-a447-73a722ba9686)" width="400" height="300">
+     <img src="https://github.com/phatx88/Endless_Code_Runner/assets/66936482/e1c8b5ac-a5ec-4171-a447-73a722ba9686)" width="400" height="300">
 
   -  Sinh ra các vật phẩm để cộng điểm của người chơi.
 3) Cơ chế trò chơi khác:
